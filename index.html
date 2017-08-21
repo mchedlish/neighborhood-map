@@ -30,6 +30,46 @@
       #show-listings {
         width: 48%;
       }
+        #choose-place {
+        width: 90%;
+            margin-left: 10px;
+            height: 25px;
+
+
+        }
+        #sulphur-baths {
+	width: 60%;
+            height: 20px;
+            margin-left: 55px;
+          display: none;
+
+}
+
+         #museum {
+	width: 60%;
+            height: 20px;
+            margin-left: 55px;
+             display: none;}
+        #fortress {
+	width: 60%;
+            height: 20px;
+            margin-left: 55px;
+             display: none;}
+       #basilica {
+	width: 60%;
+            height: 20px;
+            margin-left: 55px;
+             display: none;}
+        #waterfall {
+	width: 60%;
+            height: 20px;
+            margin-left: 55px;
+             display: none;}
+         #bridge {
+	width: 60%;
+            height: 20px;
+            margin-left: 55px;
+             display: none;}
 
       hr {
         background: #D0D7D9;
@@ -66,14 +106,26 @@
         font-size: 12px;
       }
     </style>
+
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
   </head>
   <body>
     <div class="container">
       <div class="options-box">
-        <h1>Find Your New NYC Home</h1>
+        <h1>Explore Tbilisi</h1>
         <div>
-          <input id="show-listings" type="button" value="Show Listings">
-          <input id="hide-listings" type="button" value="Hide Listings">
+          <input id="show-listings" type="button" value="Show All Places">
+          <input id="hide-listings" type="button" value="Hide All Places">
+          <input id="choose-place" type="button" value="Choose A Popular Place">
+          <input id="sulphur-baths" type="button" value="Sulphur Baths">
+          <input id="museum" type="button" value="Georgian National Museum">
+          <input id="fortress" type="button" value="Narikala Fortress">
+          <input id="basilica" type="button" value="Anchiskhati Basilica">
+          <input id="waterfall" type="button" value="Sulphur Waterfall">
+          <input id="bridge" type="button" value="The Bridge of Peace">
         </div>
       </div>
       <div id="map"></div>
@@ -166,7 +218,7 @@
         var locations = [
           {title: 'Sulphur Baths', location: {lat:41.688112, lng:44.811014}},
           {title: 'Georgian National Museum', location: {lat: 41.696215, lng: 44.800183}},
-          {title: 'Narikala Frtress', location: {lat: 41.688139, lng: 44.808463}},
+          {title: 'Narikala Fortress', location: {lat: 41.688139, lng: 44.808463}},
           {title: 'Anchiskhati Basilica', location: {lat:41.695747, lng: 44.806771}},
           {title: 'Sulphur Waterfall', location: {lat: 41.687022, lng: 44.809153}},
           {title: 'The Bridge of Peace', location: {lat:41.692983, lng: 44.808745}}
@@ -214,7 +266,22 @@
         document.getElementById('show-listings').addEventListener('click', showListings);
         document.getElementById('hide-listings').addEventListener('click', hideListings);
 
+        document.getElementById('sulphur-baths').addEventListener('click', function(){markers[0].setMap(map);});
+        document.getElementById('museum').addEventListener('click', function(){markers[1].setMap(map);});
+        document.getElementById('fortress').addEventListener('click', function(){markers[2].setMap(map);});
+        document.getElementById('basilica').addEventListener('click', function(){markers[3].setMap(map);});
+        document.getElementById('waterfall').addEventListener('click', function(){markers[4].setMap(map);});
+        document.getElementById('bridge').addEventListener('click', function(){markers[5].setMap(map);});
       }
+        $("#choose-place").click(function(){$("#sulphur-baths").show();
+         $("#museum").show();
+          $("#fortress").show();
+         $("#basilica").show();
+          $("#waterfall").show();
+
+           $("#bridge").show();
+                               });
+
 
       // This function populates the infowindow when the marker is clicked. We'll only allow
       // one infowindow which will open at the marker that is clicked, and populate based
