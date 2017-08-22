@@ -135,6 +135,14 @@
 
       // Create a new blank array for all the listing markers.
       var markers = [];
+          var locations = [
+          {title: 'Sulphur Baths', location: {lat:41.688112, lng:44.811014}},
+          {title: 'Georgian National Museum', location: {lat: 41.696215, lng: 44.800183}},
+          {title: 'Narikala Fortress', location: {lat: 41.688139, lng: 44.808463}},
+          {title: 'Anchiskhati Basilica', location: {lat:41.695747, lng: 44.806771}},
+          {title: 'Sulphur Waterfall', location: {lat: 41.687022, lng: 44.809153}},
+          {title: 'The Bridge of Peace', location: {lat:41.692983, lng: 44.808745}}
+        ];
 
       function initMap() {
         // Create a styles array to use with the map.
@@ -215,14 +223,7 @@
 
         // These are the real estate listings that will be shown to the user.
         // Normally we'd have these in a database instead.
-        var locations = [
-          {title: 'Sulphur Baths', location: {lat:41.688112, lng:44.811014}},
-          {title: 'Georgian National Museum', location: {lat: 41.696215, lng: 44.800183}},
-          {title: 'Narikala Fortress', location: {lat: 41.688139, lng: 44.808463}},
-          {title: 'Anchiskhati Basilica', location: {lat:41.695747, lng: 44.806771}},
-          {title: 'Sulphur Waterfall', location: {lat: 41.687022, lng: 44.809153}},
-          {title: 'The Bridge of Peace', location: {lat:41.692983, lng: 44.808745}}
-        ];
+
 
         var largeInfowindow = new google.maps.InfoWindow();
 
@@ -283,9 +284,30 @@
                                });
 
 
+
+    var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' +locations[0].title+'&format=json&callback=wikiCallbackFunction';
+
+            $.ajax(wikiUrl, {
+                dataType: "jsonp",
+                success: function(response) {
+                var articleList = response[1];
+                    for (var i=0; i<articleList.length; i++){
+                    var articleStr = articleList[i];
+
+                        console.log(articleStr);
+                    var url = 'http://en.wikipedia.org/wiki/' +articleStr;
+                        //$wikiElem.append('<li><a href="'+url+'">'+articleStr+'</a></li>');
+                        console.log(url);
+
+                    }
+
+                }
+            });
       // This function populates the infowindow when the marker is clicked. We'll only allow
       // one infowindow which will open at the marker that is clicked, and populate based
       // on that markers position.
+
+
       function populateInfoWindow(marker, infowindow) {
         // Check to make sure the infowindow is not already opened on this marker.
         if (infowindow.marker != marker) {
@@ -306,7 +328,12 @@
               var nearStreetViewLocation = data.location.latLng;
               var heading = google.maps.geometry.spherical.computeHeading(
                 nearStreetViewLocation, marker.position);
-                infowindow.setContent('<div>' + marker.title + '</div><div id="pano"></div>');
+
+
+
+
+
+                infowindow.setContent('<div>' + marker.title +'</div><p> niko</p><div id="pano"</div>');
                 var panoramaOptions = {
                   position: nearStreetViewLocation,
                   pov: {
@@ -321,6 +348,8 @@
                 '<div>No Street View Found</div>');
             }
           }
+
+
           // Use streetview service to get the closest streetview image within
           // 50 meters of the markers position
           streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
@@ -328,6 +357,7 @@
           infowindow.open(map, marker);
         }
       }
+        //This is wiki api working version
 
       // This function will loop through the markers array and display them all.
       function showListings() {
