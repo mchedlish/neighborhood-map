@@ -3,11 +3,7 @@
   <head>
 
  <link rel="stylesheet" type="text/css" href="style.css">
-<script
-  src="https://code.jquery.com/jquery-3.2.1.js"
-  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-  crossorigin="anonymous"></script>
-  <script src="app.js"></script>
+
 
 
   </head>
@@ -29,6 +25,25 @@
       </div>
       <div id="map"></div>
     </div>
+
+     <div class="wikipedia-container">
+        <h3 id="wikipedia-header">Relevant Wikipedia Links</h3>
+        <ul id="wikipedia-links">See relevant Wikipedia articles here!
+
+        </ul>
+
+    </div>
+
+
+  <div class="nytimes-container">
+        <h3 id="nytimes-header">New York Times Articles</h3>
+        <ul id="nytimes-articles" class="article-list">What's going on in your new city? Enter an address and hit submit and the NY Times will tell you here!</ul>
+    </div>
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.js"
+  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
+  crossorigin="anonymous"></script>
+  <script src="app.js"></script>
 
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNsb-FCIjOoWiE6ap17I2HWAkGCnvEDNE&callback=initMap"
     async defer></script>

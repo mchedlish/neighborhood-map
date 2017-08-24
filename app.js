@@ -2,6 +2,11 @@
 
       // Create a new blank array for all the listing markers.
       var markers = [];
+   var $body = $('body');
+    var $wikiElem = $('#wikipedia-links');
+    var $nytHeaderElem = $('#nytimes-header');
+    var $nytElem = $('#nytimes-articles');
+    var $greeting = $('#greeting');
           var locations = [
           {title: 'Sulphur Baths', location: {lat:41.688112, lng:44.811014}},
           {title: 'Georgian National Museum', location: {lat: 41.696215, lng: 44.800183}},
@@ -134,12 +139,23 @@
         document.getElementById('show-listings').addEventListener('click', showListings);
         document.getElementById('hide-listings').addEventListener('click', hideListings);
 
-        document.getElementById('sulphur-baths').addEventListener('click', function(){markers[0].setMap(map);});
-        document.getElementById('museum').addEventListener('click', function(){markers[1].setMap(map);});
-        document.getElementById('fortress').addEventListener('click', function(){markers[2].setMap(map);});
-        document.getElementById('basilica').addEventListener('click', function(){markers[3].setMap(map);});
-        document.getElementById('waterfall').addEventListener('click', function(){markers[4].setMap(map);});
-        document.getElementById('bridge').addEventListener('click', function(){markers[5].setMap(map);});
+        document.getElementById('sulphur-baths').addEventListener('click', function(){markers[0].setMap(map);
+          locationWikiInfo(0);  });                                                                   document.getElementById('museum').addEventListener('click', function(){markers[1].setMap(map);
+
+          locationWikiInfo(1);
+          });
+        document.getElementById('fortress').addEventListener('click', function(){markers[2].setMap(map);
+
+        locationWikiInfo(2);                                                                        });
+        document.getElementById('basilica').addEventListener('click', function(){markers[3].setMap(map);
+
+         locationWikiInfo(3);                                                                       });
+        document.getElementById('waterfall').addEventListener('click', function(){markers[4].setMap(map);
+        locationWikiInfo(4);
+                                                                                 });
+        document.getElementById('bridge').addEventListener('click', function(){markers[5].setMap(map);
+
+          locationWikiInfo(5);                                                                    });
 
 
         $("#choose-place").click(function(){
@@ -152,9 +168,9 @@
            $("#bridge").show();
                                });
       }
-
-
-    var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' +locations[0].title+'&format=json&callback=wikiCallbackFunction';
+var locNum;
+function locationWikiInfo (locNum) {
+      var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search='+locations[locNum].title+'&format=json&callback=wikiCallbackFunction';
 
             $.ajax(wikiUrl, {
                 dataType: "jsonp",
@@ -163,15 +179,40 @@
                     for (var i=0; i<articleList.length; i++){
                     var articleStr = articleList[i];
 
-                        console.log(articleStr);
-                    var url = 'http://en.wikipedia.org/wiki/' +articleStr;
-                        //$wikiElem.append('<li><a href="'+url+'">'+articleStr+'</a></li>');
-                        console.log(url);
+
+                    var url = 'http://en.wikipedia.org/wiki/'+ articleStr;
+                        $wikiElem.append('<li><a href="'+url+'">'+articleStr+'</a></li>');
 
                     }
 
                 }
-            });
+            });}
+
+
+  var nytimesUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json";
+nytimesUrl += '?' + $.param({
+  'api-key': "09fb3bfd089d48d1877eebffe71566cf",
+  'q': locations[1].title
+});
+$.ajax({
+  url: nytimesUrl,
+  method: 'GET',
+}).done(function(result) {
+  console.log(result);
+ var articles =result.response.docs;
+    console.log(articles);
+   for (var i=0; i<articles.length; i++) {
+    var article = articles[i];
+        $nytElem.append('<li class="article">'+'<a href="'+article.web_url+'">' +article.headline.main+'</a>'+'<p>'+article.snippet+'</p>'+'</li>');}
+
+
+
+}).fail(function(err) {
+    console.log("error");
+ throw err;
+});
+
+
       // This function populates the infowindow when the marker is clicked. We'll only allow
       // one infowindow which will open at the marker that is clicked, and populate based
       // on that markers position.
