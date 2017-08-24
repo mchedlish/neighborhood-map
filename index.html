@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html>
-  <head>
 
- <link rel="stylesheet" type="text/css" href="style.css">
+<head>
 
+    <link rel="stylesheet" type="text/css" href="style.css">
 
+</head>
 
-  </head>
-  <body>
+<body>
     <div class="container">
-      <div class="options-box">
-        <h1>Explore Tbilisi</h1>
-        <div>
-          <input id="show-listings" type="button" value="Show All Places">
-          <input id="hide-listings" type="button" value="Hide All Places">
-          <input id="choose-place" type="button" value="Choose A Popular Place">
-          <input id="sulphur-baths" type="button" value="Sulphur Baths">
-          <input id="museum" type="button" value="Georgian National Museum">
-          <input id="fortress" type="button" value="Narikala Fortress">
-          <input id="basilica" type="button" value="Anchiskhati Basilica">
-          <input id="waterfall" type="button" value="Sulphur Waterfall">
-          <input id="bridge" type="button" value="The Bridge of Peace">
+        <div class="options-box">
+            <h1>Explore Tbilisi</h1>
+            <div>
+
+                <input id="choose-place" type="button" value="Choose A Popular Place">
+                <input id="sulphur-baths" type="button" value="Sulphur Baths">
+                <input id="museum" type="button" value="Georgian National Museum">
+                <input id="fortress" type="button" value="Narikala Fortress">
+                <input id="basilica" type="button" value="Anchiskhati Basilica">
+                <input id="waterfall" type="button" value="Sulphur Waterfall">
+                <input id="bridge" type="button" value="The Bridge of Peace">
+                <input id="hide-listings" type="button" value="Clear All">
+            </div>
         </div>
-      </div>
-      <div id="map"></div>
+        <div id="map"></div>
     </div>
 
-     <div class="wikipedia-container">
+    <div class="wikipedia-container">
         <h3 id="wikipedia-header">Relevant Wikipedia Links</h3>
         <ul id="wikipedia-links">See relevant Wikipedia articles here!
 
@@ -34,19 +34,11 @@
 
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
 
-  <div class="nytimes-container">
-        <h3 id="nytimes-header">New York Times Articles</h3>
-        <ul id="nytimes-articles" class="article-list">What's going on in your new city? Enter an address and hit submit and the NY Times will tell you here!</ul>
-    </div>
-    <script
-  src="https://code.jquery.com/jquery-3.2.1.js"
-  integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE="
-  crossorigin="anonymous"></script>
-  <script src="app.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNsb-FCIjOoWiE6ap17I2HWAkGCnvEDNE&callback=initMap" async defer></script>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCNsb-FCIjOoWiE6ap17I2HWAkGCnvEDNE&callback=initMap"
-    async defer></script>
+</body>
 
-  </body>
 </html>
