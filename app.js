@@ -319,3 +319,20 @@
          new google.maps.Size(21, 34));
      return markerImage;
  }
+
+var viewModel = {
+choose: ko.observable("Choose A Place"),
+tbilisi: ko.observable("Explore Tbilisi"),
+sbaths: ko.observable("Sulphur Baths"),
+museum: ko.observable("Georgian National Museum"),
+fortress: ko.observable("Narikala Fortress"),
+basilica: ko.observable("Anchiskhati Basilica"),
+waterfall:ko.observable("Sulphur Waterfall"),
+bridge: ko.observable("The Bridge of Peace"),
+clear: ko.observable("Clear All"),
+head: ko.observable("Relevant Wikipedia Links"),
+lists: ko.observable("See relevant Wikipedia articles here!")
+
+}
+ko.applyBindings(viewModel);
+
