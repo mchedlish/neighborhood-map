@@ -2,36 +2,87 @@
 <html>
 
 <head>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
 
 </head>
 
 <body>
-    <div class="container">
-        <div class="options-box">
-            <h1 data-bind="text: tbilisi"></h1>
-            <div>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="options-box col-sm-2">
+                <div class="row">
+                    <h1 data-bind="text: tbilisi" class="col-md-12"></h1>
+                </div>
+                <div class="row">
 
-                <input id="choose-place" type="button" data-bind="value: choose">
-                <input id="sulphur-baths" type="button" data-bind="value: sbaths">
-                <input id="museum" type="button" data-bind="value: museum">
-                <input id="fortress" type="button" data-bind="value: fortress">
-                <input id="basilica" type="button" data-bind= "value: basilica">
-                <input id="waterfall" type="button" data-bind="value: waterfall">
-                <input id="bridge" type="button" data-bind="value: bridge">
-                <input id="hide-listings" type="button" data-bind="value: clear">
+
+                    <div class="col-md-10">
+                        <input id="choose-place" type="button" data-bind="value: choose" class="btn btn-lg btn-primary btn-block ">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <input id="sulphur-baths" type="button" data-bind="value: sbaths" class="btn btn-block btn-info">
+                    </div>
+                </div>
+
+                <div class="row">
+                <div class="col-md-10">
+                <input id="museum" type="button" data-bind="value: museum" class="btn btn-info btn-block">
+</div>
+</div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <input id="fortress" type="button" data-bind="value: fortress" class="btn btn-info btn-block">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                    <input id="basilica" type="button" data-bind="value: basilica" class="btn btn-info btn-block">
+                </div>
             </div>
+<div class="row">
+           <div class="col-md-10">
+            <input id="waterfall" type="button" data-bind="value: waterfall" class="btn btn-info btn-block">
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="col-md-10">
+            <input id="bridge" type="button" data-bind="value: bridge" class="btn btn-info btn-block">
+            </div>
+            </div>
+
+            <div class="row">
+            <div class="col-md-10">
+            <input id="hide-listings" type="button" data-bind="value: clear" class="btn btn-danger btn-block" >
+            </div>
+           </div>
+            <div class="row">
+          <div class="col-md-12">
+        <h3 id="wikipedia-header" data-bind="text:head" class="col-md-12"></h3>
+        <ul id="wikipedia-links" data-bind="text: lists" class="col-md-12"></ul>
+
+</div>
+
+    </div>
         </div>
-        <div id="map"></div>
+
+
+
+    <div id="map" class="col-md-10"></div>
     </div>
 
-    <div class="wikipedia-container">
-        <h3 id="wikipedia-header" data-bind="text:head"></h3>
-        <ul id="wikipedia-links" data-bind="text: lists"></ul>
+
 
     </div>
-<script src="knockout.js"></script>
+
+
+    <script src="knockout.js"></script>
     <script src="https://code.jquery.com/jquery-3.2.1.js" integrity="sha256-DZAnKJ/6XZ9si04Hgrsxu/8s717jcIzLy3oi35EouyE=" crossorigin="anonymous"></script>
     <script src="app.js"></script>
 

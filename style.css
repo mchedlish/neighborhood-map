@@ -1,108 +1,135 @@
-  html,
+ /* html,
   body {
       font-family: Arial, sans-serif;
       height: 100%;
       margin: 0;
       padding: 0;
-  }
+  }*/
 
-  .container {
+  /*.container {
       height: 90%;
       position: relative;
-  }
+  }*/
 
   input {
       font-size: 12px;
   }
 
+/*
   h1 {
-      color: #525454;
-      font-size: 22px;
+      color: rgb(38, 66, 185);
+      font-size: 24px;
       margin: 0 0 10px 0;
       text-align: center;
   }
+*/
 
 
 
   #choose-place {
+/*
       width: 90%;
       margin-left: 10px;
       height: 25px;
+*/
+
   }
 
   #sulphur-baths {
+      margin-top: 10px;
+/*
       width: 60%;
       height: 20px;
       margin-left: 55px;
+*/
       display: none;
   }
 
   #museum {
+/*margin-top: 10px;
       width: 60%;
       height: 20px;
       margin-left: 55px;
+*/
       display: none;
+      margin-top: 10px;
   }
 
   #fortress {
+/*
       width: 60%;
       height: 20px;
       margin-left: 55px;
+*/
       display: none;
+      margin-top: 10px;
   }
 
   #basilica {
+/*
       width: 60%;
       height: 20px;
       margin-left: 55px;
+*/
       display: none;
+      margin-top: 10px;
   }
 
   #waterfall {
+/*
       width: 60%;
       height: 20px;
       margin-left: 55px;
+*/
       display: none;
+      margin-top: 10px;
   }
 
   #bridge {
+/*
       width: 60%;
       height: 20px;
       margin-left: 55px;
+*/
       display: none;
+      margin-top: 10px;
   }
 
  #hide-listings {
+/*
       width: 80%;
       height: 20px;
       margin-left: 25px;
+*/
       display: none;
+     margin-top: 10px;
   }
 
-  hr {
+  /*hr {
       background: #D0D7D9;
       height: 1px;
       margin: 20px 0 20px 0;
       border: none;
-  }
+  }*/
 
   #map {
-      bottom: 0px;
+
       height: 100%;
-      left: 362px;
-      position: absolute;
-      right: 0px;
+    position: absolute;
+     width: auto;
+      right: 0;
+      left: 30px;*/
   }
 
   .options-box {
       background: #fff;
       border: 1px solid #999;
-      border-radius: 3px;
-      height: 95%;
-      line-height: 35px;
-      padding: 10px 10px 30px 10px;
-      text-align: left;
-      width: 340px;
+      border-radius: 6px;
+/*      height: 95%;*/
+/*      line-height: 35px;*/
+/*      padding: 10px 10px 30px 10px;*/
+/*      text-align: left;*/
+/*      width: 340px;*/
   }
 
   #pano {
@@ -110,6 +137,7 @@
       height: 200px;
   }
 
-  .text {
+  /*.text {
       font-size: 12px;
-  }
+  }*/
+
