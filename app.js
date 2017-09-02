@@ -333,6 +333,6 @@ clear: ko.observable("Clear All"),
 head: ko.observable("Relevant Wikipedia Links"),
 lists: ko.observable("See relevant Wikipedia articles here!")
 
-}
+};
 ko.applyBindings(viewModel);
 
