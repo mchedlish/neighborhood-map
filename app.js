@@ -168,7 +168,7 @@
          marker.addListener('click', function () {
              populateInfoWindow(this, largeInfowindow);
          });
-     };
+     }
 
      function mouse() {
 
@@ -176,7 +176,7 @@
              this.setIcon(highlightedIcon);
          });
 
-     };
+     }
 
      function mousout() {
          marker.addListener('mouseout', function () {
@@ -285,6 +285,8 @@
          });
          var streetViewService = new google.maps.StreetViewService();
          var radius = 50;
+
+
 
          function getStreetView(data, status) {
              if (status == google.maps.StreetViewStatus.OK) {
