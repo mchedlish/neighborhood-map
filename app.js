@@ -304,7 +304,7 @@
                  infowindow.setContent('<div>' + marker.title + '</div>' +
                      '<div>No Street View Found</div>');
              }
-         }
+         };
 
 
 
