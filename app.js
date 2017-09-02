@@ -1,10 +1,10 @@
  /*jshint loopfunc:true */
 
-var map;
+ var map;
 
  var markers = [];
  var $wikiElem = $('#wikipedia-links');
-  var locations = [
+ var locations = [
      {
          title: 'Sulphur Baths',
          location: {
@@ -161,12 +161,35 @@ var map;
      var largeInfowindow = new google.maps.InfoWindow();
      var defaultIcon = makeMarkerIcon('0091ff');
      var highlightedIcon = makeMarkerIcon('FFFF24');
+     var marker;
 
+     function clicker() {
+
+         marker.addListener('click', function () {
+             populateInfoWindow(this, largeInfowindow);
+         });
+     };
+
+     function mouse() {
+
+         marker.addListener('mouseover', function () {
+             this.setIcon(highlightedIcon);
+         });
+
+     };
+
+     function mousout() {
+         marker.addListener('mouseout', function () {
+             this.setIcon(defaultIcon);
+         });
+
+
+     }
 
      for (var i = 0; i < locations.length; i++) {
          var position = locations[i].location;
          var title = locations[i].title;
-         var marker = new google.maps.Marker({
+         marker = new google.maps.Marker({
              position: position,
              title: title,
              animation: google.maps.Animation.DROP,
@@ -175,17 +198,12 @@ var map;
          });
 
          markers.push(marker);
-         marker.addListener('click', function () {
-             populateInfoWindow(this, largeInfowindow);
-         });
+         clicker();
+         mouse();
+         mousout();
 
-         marker.addListener('mouseover', function () {
-             this.setIcon(highlightedIcon);
-         });
-         marker.addListener('mouseout', function () {
-             this.setIcon(defaultIcon);
-         });
      }
+
 
      //document.getElementById('show-listings').addEventListener('click', showListings);
      document.getElementById('hide-listings').addEventListener('click', hideListings);
@@ -263,7 +281,7 @@ var map;
          infowindow.setContent('');
          infowindow.marker = marker;
          infowindow.addListener('closeclick', function () {
-         infowindow.marker = null;
+             infowindow.marker = null;
          });
          var streetViewService = new google.maps.StreetViewService();
          var radius = 50;
@@ -295,6 +313,8 @@ var map;
      }
  }
 
+
+
  function showListings() {
      var bounds = new google.maps.LatLngBounds();
 
@@ -305,7 +325,7 @@ var map;
      map.fitBounds(bounds);
  }
 
-  function hideListings() {
+ function hideListings() {
      for (var i = 0; i < markers.length; i++) {
          markers[i].setMap(null);
      }
@@ -323,19 +343,18 @@ var map;
      return markerImage;
  }
 
-var viewModel = {
-choose: ko.observable("Choose A Place"),
-tbilisi: ko.observable("Explore Tbilisi"),
-sbaths: ko.observable("Sulphur Baths"),
-museum: ko.observable("Georgian National Museum"),
-fortress: ko.observable("Narikala Fortress"),
-basilica: ko.observable("Anchiskhati Basilica"),
-waterfall:ko.observable("Sulphur Waterfall"),
-bridge: ko.observable("The Bridge of Peace"),
-clear: ko.observable("Clear All"),
-head: ko.observable("Relevant Wikipedia Links"),
-lists: ko.observable("See relevant Wikipedia articles here!")
+ var viewModel = {
+     choose: ko.observable("Choose A Place"),
+     tbilisi: ko.observable("Explore Tbilisi"),
+     sbaths: ko.observable("Sulphur Baths"),
+     museum: ko.observable("Georgian National Museum"),
+     fortress: ko.observable("Narikala Fortress"),
+     basilica: ko.observable("Anchiskhati Basilica"),
+     waterfall: ko.observable("Sulphur Waterfall"),
+     bridge: ko.observable("The Bridge of Peace"),
+     clear: ko.observable("Clear All"),
+     head: ko.observable("Relevant Wikipedia Links"),
+     lists: ko.observable("See relevant Wikipedia articles here!")
 
-};
-ko.applyBindings(viewModel);
-
+ };
+ ko.applyBindings(viewModel);
