@@ -1,4 +1,6 @@
- var map;
+ /*jshint loopfunc:true */
+
+var map;
 
  var markers = [];
  var $wikiElem = $('#wikipedia-links');
@@ -159,6 +161,7 @@
      var largeInfowindow = new google.maps.InfoWindow();
      var defaultIcon = makeMarkerIcon('0091ff');
      var highlightedIcon = makeMarkerIcon('FFFF24');
+
 
      for (var i = 0; i < locations.length; i++) {
          var position = locations[i].location;
