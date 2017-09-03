@@ -167,6 +167,7 @@
 
          marker.addListener('click', function () {
              populateInfoWindow(this, largeInfowindow);
+
          });
      }
 
@@ -174,6 +175,10 @@
 
          marker.addListener('mouseover', function () {
              this.setIcon(highlightedIcon);
+             this.setAnimation(google.maps.Animation.BOUNCE);
+
+
+
          });
 
      }
@@ -181,9 +186,16 @@
      function mousout() {
          marker.addListener('mouseout', function () {
              this.setIcon(defaultIcon);
+
          });
+     }
 
-
+     function toggleBounce() {
+         if (marker.getAnimation() !== null) {
+             marker.setAnimation(null);
+         } else {
+             marker.setAnimation(google.maps.Animation.BOUNCE);
+         }
      }
 
      for (var i = 0; i < locations.length; i++) {
@@ -194,7 +206,10 @@
              title: title,
              animation: google.maps.Animation.DROP,
              icon: defaultIcon,
-             id: i
+             id: i,
+             map: map,
+
+
          });
 
          markers.push(marker);
@@ -202,49 +217,19 @@
          mouse();
          mousout();
 
+
      }
 
 
-     //document.getElementById('show-listings').addEventListener('click', showListings);
-     document.getElementById('hide-listings').addEventListener('click', hideListings);
-
-     document.getElementById('sulphur-baths').addEventListener('click', function () {
-         markers[0].setMap(map);
-         locationWikiInfo(0);
-     });
-     document.getElementById('museum').addEventListener('click', function () {
-         markers[1].setMap(map);
-
-         locationWikiInfo(1);
-     });
-     document.getElementById('fortress').addEventListener('click', function () {
-         markers[2].setMap(map);
-
-         locationWikiInfo(2);
-     });
-     document.getElementById('basilica').addEventListener('click', function () {
-         markers[3].setMap(map);
-
-         locationWikiInfo(3);
-     });
-     document.getElementById('waterfall').addEventListener('click', function () {
-         markers[4].setMap(map);
-         locationWikiInfo(4);
-     });
-     document.getElementById('bridge').addEventListener('click', function () {
-         markers[5].setMap(map);
-
-         locationWikiInfo(5);
-     });
 
      $("#choose-place").click(function () {
-         $("#sulphur-baths").show();
-         $("#museum").show();
-         $("#fortress").show();
-         $("#basilica").show();
-         $("#waterfall").show();
-         $("#bridge").show();
-         $("#hide-listings").show();
+         $("#sulphur-baths").toggle();
+         $("#museum").toggle();
+         $("#fortress").toggle();
+         $("#basilica").toggle();
+         $("#waterfall").toggle();
+         $("#bridge").toggle();
+         $("#hide-listings").toggle();
 
 
      });
@@ -253,9 +238,11 @@
 
  function locationWikiInfo(locNum) {
      var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + locations[locNum].title + '&format=json&callback=wikiCallbackFunction';
+
+
      var wikiRequestTimeout = setTimeout(function () {
          $wikiElem.text("No article found on Wikipedia");
-     }, 3000);
+     }, 1000);
 
      $.ajax(wikiUrl, {
          dataType: "jsonp",
@@ -272,6 +259,8 @@
 
          }
      });
+
+
  }
 
 
@@ -345,7 +334,7 @@
  }
 
  var viewModel = {
-     choose: ko.observable("Choose A Place"),
+     choose: ko.observable("Show/Hide Places"),
      tbilisi: ko.observable("Explore Tbilisi"),
      sbaths: ko.observable("Sulphur Baths"),
      museum: ko.observable("Georgian National Museum"),
@@ -353,9 +342,44 @@
      basilica: ko.observable("Anchiskhati Basilica"),
      waterfall: ko.observable("Sulphur Waterfall"),
      bridge: ko.observable("The Bridge of Peace"),
-     clear: ko.observable("Clear All"),
+     clear: ko.observable("Clear Place Markers"),
      head: ko.observable("Relevant Wikipedia Links"),
-     lists: ko.observable("See relevant Wikipedia articles here!")
+     lists: ko.observable("See relevant Wikipedia articles here!"),
+     listhide: function () {
+         hideListings();
+         $("li").hide();
+     },
+     mark0: function () {
+         markers[0].setMap(map);
+         locationWikiInfo(0);
+
+
+     },
+     mark1: function () {
+         markers[1].setMap(map);
+         locationWikiInfo(1);
+         $("li").hide();
+     },
+     mark2: function () {
+         markers[2].setMap(map);
+         locationWikiInfo(2);
+         $("li").hide();
+     },
+     mark3: function () {
+         markers[3].setMap(map);
+         locationWikiInfo(3);
+         $("li").hide();
+     },
+     mark4: function () {
+         markers[4].setMap(map);
+         locationWikiInfo(4);
+         $("li").hide();
+     },
+     mark5: function () {
+         markers[5].setMap(map);
+         locationWikiInfo(5);
+         $("li").hide();
+     }
 
  };
  ko.applyBindings(viewModel);
