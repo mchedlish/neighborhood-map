@@ -1,8 +1,8 @@
  /*jshint loopfunc:true */
 
  var map;
-var url;
-var articleStr;
+ var url;
+ var articleStr;
 
  var markers = [];
  var $wikiElem = $('#wikipedia-links');
@@ -285,7 +285,7 @@ var articleStr;
                  var nearStreetViewLocation = data.location.latLng;
                  var heading = google.maps.geometry.spherical.computeHeading(
                      nearStreetViewLocation, marker.position);
-                 infowindow.setContent('<div>' + marker.title + '</div>'+'<p><a href="' + url + '">' +"Click Link For Wikipedia Article" + '</a></p>' + '<div id="pano"</div>');
+                 infowindow.setContent('<div>' + marker.title + '</div>' + '<p><a href="' + url + '">' + "Click Link For Wikipedia Article" + '</a></p>' + '<div id="pano"</div>');
 
 
 
@@ -354,6 +354,7 @@ var articleStr;
      clear: ko.observable("Clear Place Markers"),
      head: ko.observable("Relevant Wikipedia Links"),
      lists: ko.observable("See relevant Wikipedia articles here!"),
+
      listhide: function () {
          hideListings();
          $("li").hide();
@@ -361,7 +362,7 @@ var articleStr;
      mark0: function () {
          markers[0].setMap(map);
          locationWikiInfo(0);
-$("li").hide();
+         $("li").hide();
 
      },
      mark1: function () {
@@ -392,3 +393,8 @@ $("li").hide();
 
  };
  ko.applyBindings(viewModel);
+
+function googleMapsApiErrorHandler(){
+
+    $('body').prepend('<p id="map-error">Sorry we are having trouble loading google maps API, please try again in a moment.</p>');
+}
