@@ -1,12 +1,15 @@
  /*jshint loopfunc:true */
 
  var map;
+var url;
+var articleStr;
 
  var markers = [];
  var $wikiElem = $('#wikipedia-links');
  var locations = [
      {
          title: 'Sulphur Baths',
+
          location: {
              lat: 41.688112,
              lng: 44.811014
@@ -14,6 +17,7 @@
      },
      {
          title: 'Georgian National Museum',
+
          location: {
              lat: 41.696215,
              lng: 44.800183
@@ -241,7 +245,7 @@
 
 
      var wikiRequestTimeout = setTimeout(function () {
-         $wikiElem.text("No article found on Wikipedia");
+         $wikiElem.append('<li>No article found on Wikipedia !!!</li>');
      }, 1000);
 
      $.ajax(wikiUrl, {
@@ -249,11 +253,13 @@
          success: function (response) {
              var articleList = response[1];
              for (var i = 0; i < articleList.length; i++) {
-                 var articleStr = articleList[i];
+                 articleStr = articleList[i];
 
-                 var url = 'http://en.wikipedia.org/wiki/' + articleStr;
+                 url = 'http://en.wikipedia.org/wiki/' + articleStr;
                  $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
+
                  clearTimeout(wikiRequestTimeout);
+
 
              }
 
@@ -279,7 +285,10 @@
                  var nearStreetViewLocation = data.location.latLng;
                  var heading = google.maps.geometry.spherical.computeHeading(
                      nearStreetViewLocation, marker.position);
-                 infowindow.setContent('<div>' + marker.title + '</div><p> niko</p><div id="pano"</div>');
+                 infowindow.setContent('<div>' + marker.title + '</div>'+'<p><a href="' + url + '">' +"Click Link For Wikipedia Article" + '</a></p>' + '<div id="pano"</div>');
+
+
+
                  var panoramaOptions = {
                      position: nearStreetViewLocation,
                      pov: {
@@ -287,6 +296,7 @@
                          pitch: 30
                      }
                  };
+
                  var panorama = new google.maps.StreetViewPanorama(
                      document.getElementById('pano'), panoramaOptions);
              } else {
@@ -294,7 +304,6 @@
                      '<div>No Street View Found</div>');
              }
          };
-
 
 
          streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
@@ -352,7 +361,7 @@
      mark0: function () {
          markers[0].setMap(map);
          locationWikiInfo(0);
-
+$("li").hide();
 
      },
      mark1: function () {
