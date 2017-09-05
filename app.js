@@ -3,67 +3,63 @@
  var map;
  var url;
  var articleStr;
-
+ var wikiLinks;
  var markers = [];
  var $wikiElem = $('#wikipedia-links');
  var locations = [
      {
          title: 'Sulphur Baths',
-
          location: {
              lat: 41.688112,
              lng: 44.811014
          }
-     },
+},
      {
          title: 'Georgian National Museum',
-
          location: {
              lat: 41.696215,
              lng: 44.800183
          }
-     },
+},
      {
          title: 'Narikala Fortress',
          location: {
              lat: 41.688139,
              lng: 44.808463
          }
-     },
+},
      {
          title: 'Anchiskhati Basilica',
          location: {
              lat: 41.695747,
              lng: 44.806771
          }
-     },
+},
      {
          title: 'Sulphur Waterfall',
          location: {
              lat: 41.687022,
              lng: 44.809153
          }
-     },
+},
      {
          title: 'The Bridge of Peace',
          location: {
              lat: 41.692983,
              lng: 44.808745
          }
-     }
-        ];
+}
+];
 
  function initMap() {
-
      var styles = [
          {
              featureType: 'water',
-             stylers: [
-                 {
-                     color: '#19a0d8'
-                 }
-            ]
-          }, {
+             stylers: [{
+                 color: '#19a0d8'
+             }]
+         },
+         {
              featureType: 'administrative',
              elementType: 'labels.text.stroke',
              stylers: [
@@ -72,85 +68,75 @@
                  },
                  {
                      weight: 6
-                 }
-            ]
-          }, {
+                 }]
+         },
+         {
              featureType: 'administrative',
              elementType: 'labels.text.fill',
-             stylers: [
-                 {
-                     color: '#e85113'
-                 }
-            ]
-          }, {
+             stylers: [{
+                 color: '#e85113'
+             }]
+         },
+         {
              featureType: 'road.highway',
              elementType: 'geometry.stroke',
-             stylers: [
-                 {
+             stylers: [{
                      color: '#efe9e4'
                  },
                  {
                      lightness: -40
-                 }
-            ]
-          }, {
+                 }]
+         },
+         {
              featureType: 'transit.station',
-             stylers: [
-                 {
+             stylers: [{
                      weight: 9
                  },
                  {
                      hue: '#e85113'
-                 }
-            ]
-          }, {
+                 }]
+         },
+         {
              featureType: 'road.highway',
              elementType: 'labels.icon',
-             stylers: [
-                 {
-                     visibility: 'off'
-                 }
-            ]
-          }, {
+             stylers: [{
+                 visibility: 'off'
+             }]
+         },
+         {
              featureType: 'water',
              elementType: 'labels.text.stroke',
-             stylers: [
-                 {
-                     lightness: 100
-                 }
-            ]
-          }, {
+             stylers: [{
+                 lightness: 100
+             }]
+         },
+         {
              featureType: 'water',
              elementType: 'labels.text.fill',
-             stylers: [
-                 {
-                     lightness: -100
-                 }
-            ]
-          }, {
+             stylers: [{
+                 lightness: -100
+             }]
+         },
+         {
              featureType: 'poi',
              elementType: 'geometry',
-             stylers: [
-                 {
+             stylers: [{
                      visibility: 'on'
                  },
                  {
                      color: '#f0e4d3'
-                 }
-            ]
-          }, {
+                 }]
+         },
+         {
              featureType: 'road.highway',
              elementType: 'geometry.fill',
-             stylers: [
-                 {
+             stylers: [{
                      color: '#efe9e4'
                  },
                  {
                      lightness: -25
-                 }
-            ]
-          }
-        ];
+                 }]
+         }];
 
      map = new google.maps.Map(document.getElementById('map'), {
          center: {
@@ -168,38 +154,28 @@
      var marker;
 
      function clicker() {
-
          marker.addListener('click', function () {
              populateInfoWindow(this, largeInfowindow);
-
          });
      }
 
      function mouse() {
-
          marker.addListener('mouseover', function () {
              this.setIcon(highlightedIcon);
-
-
-
          });
-
      }
 
      function mousout() {
          marker.addListener('mouseout', function () {
              this.setIcon(defaultIcon);
-
          });
      }
 
-     function mousclick () {
-
-     marker.addListener('click', function() {
-     this.setAnimation(google.maps.Animation.BOUNCE);
-
-
-     });}
+     function mousclick() {
+         marker.addListener('click', function () {
+             this.setAnimation(google.maps.Animation.BOUNCE);
+         });
+     }
 
      function toggleBounce() {
          if (marker.getAnimation() !== null) {
@@ -219,26 +195,19 @@
              icon: defaultIcon,
              id: i,
              map: map,
-
-
          });
-
          markers.push(marker);
          clicker();
          mouse();
          mousout();
          mousclick();
-
-
      }
-
  }
+
  var locNum;
 
  function locationWikiInfo(locNum) {
      var wikiUrl = 'http://en.wikipedia.org/w/api.php?action=opensearch&search=' + locations[locNum].title + '&format=json&callback=wikiCallbackFunction';
-
-
      var wikiRequestTimeout = setTimeout(function () {
          $wikiElem.append('<li>No article found on Wikipedia !!!</li>');
      }, 1000);
@@ -249,24 +218,15 @@
              var articleList = response[1];
              for (var i = 0; i < articleList.length; i++) {
                  articleStr = articleList[i];
-
                  url = 'http://en.wikipedia.org/wiki/' + articleStr;
                  $wikiElem.append('<li><a href="' + url + '">' + articleStr + '</a></li>');
-
                  clearTimeout(wikiRequestTimeout);
-
-
              }
-
          }
      });
-
-
  }
 
-
  function populateInfoWindow(marker, infowindow) {
-
      if (infowindow.marker != marker) {
          infowindow.setContent('');
          infowindow.marker = marker;
@@ -281,8 +241,6 @@
                  var heading = google.maps.geometry.spherical.computeHeading(
                      nearStreetViewLocation, marker.position);
                  infowindow.setContent('<div>' + marker.title + '</div>' + '<p><a href="' + url + '">' + "Click Link For Wikipedia Article" + '</a></p>' + '<div id="pano"</div>');
-
-
 
                  var panoramaOptions = {
                      position: nearStreetViewLocation,
@@ -299,15 +257,10 @@
                      '<div>No Street View Found</div>');
              }
          };
-
-
          streetViewService.getPanoramaByLocation(marker.position, radius, getStreetView);
-
          infowindow.open(map, marker);
      }
  }
-
-
 
  function showListings() {
      var bounds = new google.maps.LatLngBounds();
@@ -324,7 +277,6 @@
          markers[i].setMap(null);
      }
  }
-
 
  function makeMarkerIcon(markerColor) {
      var markerImage = new google.maps.MarkerImage(
@@ -349,18 +301,14 @@
      clear: ko.observable("Clear Place Markers"),
      head: ko.observable("Relevant Wikipedia Links"),
      lists: ko.observable("See relevant Wikipedia articles here!"),
-
      listhide: function () {
-          $("#sulphur-baths").toggle();
+         $("#sulphur-baths").toggle();
          $("#museum").toggle();
          $("#fortress").toggle();
          $("#basilica").toggle();
          $("#waterfall").toggle();
          $("#bridge").toggle();
          $("#hide-listings").toggle();
-
-
-
 
          hideListings();
          $("li").hide();
@@ -369,7 +317,6 @@
          markers[0].setMap(map);
          locationWikiInfo(0);
          $("li").hide();
-
      },
      mark1: function () {
          markers[1].setMap(map);
@@ -396,11 +343,9 @@
          locationWikiInfo(5);
          $("li").hide();
      }
-
  };
  ko.applyBindings(viewModel);
 
-function googleMapsApiErrorHandler(){
-
-    $('body').prepend('<p id="map-error">Sorry we are having trouble loading google maps API, please try again in a moment.</p>');
-}
+ function googleMapsApiErrorHandler() {
+     $('body').prepend('<p id="map-error">Sorry we are having trouble loading google maps API, please try again in a moment.</p>');
+ }
