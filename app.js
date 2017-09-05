@@ -179,7 +179,6 @@
 
          marker.addListener('mouseover', function () {
              this.setIcon(highlightedIcon);
-             this.setAnimation(google.maps.Animation.BOUNCE);
 
 
 
@@ -193,6 +192,14 @@
 
          });
      }
+
+     function mousclick () {
+
+     marker.addListener('click', function() {
+     this.setAnimation(google.maps.Animation.BOUNCE);
+
+
+     });}
 
      function toggleBounce() {
          if (marker.getAnimation() !== null) {
@@ -220,23 +227,11 @@
          clicker();
          mouse();
          mousout();
+         mousclick();
 
 
      }
 
-
-
-     $("#choose-place").click(function () {
-         $("#sulphur-baths").toggle();
-         $("#museum").toggle();
-         $("#fortress").toggle();
-         $("#basilica").toggle();
-         $("#waterfall").toggle();
-         $("#bridge").toggle();
-         $("#hide-listings").toggle();
-
-
-     });
  }
  var locNum;
 
@@ -356,6 +351,17 @@
      lists: ko.observable("See relevant Wikipedia articles here!"),
 
      listhide: function () {
+          $("#sulphur-baths").toggle();
+         $("#museum").toggle();
+         $("#fortress").toggle();
+         $("#basilica").toggle();
+         $("#waterfall").toggle();
+         $("#bridge").toggle();
+         $("#hide-listings").toggle();
+
+
+
+
          hideListings();
          $("li").hide();
      },
