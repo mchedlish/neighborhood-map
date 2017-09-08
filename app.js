@@ -168,6 +168,7 @@
      function mousout() {
          marker.addListener('mouseout', function () {
              this.setIcon(defaultIcon);
+             this.setAnimation(null);
          });
      }
 
